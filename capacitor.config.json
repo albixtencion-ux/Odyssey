@@ -1,0 +1,9 @@
+{
+  "appId": "com.starbound.odyssey",
+  "appName": "Starbound Odyssey",
+  "webDir": "www",
+  "backgroundColor": "#05030f",
+  "android": {
+    "backgroundColor": "#05030f"
+  }
+}
