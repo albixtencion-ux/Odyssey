@@ -38,14 +38,16 @@ jobs:
           S=android/app/src/main/res/values/styles.xml
           sed -i '/name="AppTheme.NoActionBar"/a\        <item name="android:windowFullscreen">true</item>' "$S"
 
-      - name: App icon (optional)
-        continue-on-error: true
+      - name: App icon
         run: |
           if [ -f icon.png ]; then
-            mkdir -p assets
-            cp icon.png assets/icon-only.png
-            cp icon.png assets/icon-foreground.png
-            npx --yes @capacitor/assets generate --android --iconBackgroundColor '#05030f' --iconBackgroundColorDark '#05030f'
+            R=android/app/src/main/res
+            rm -rf $R/mipmap-anydpi-v26
+            for d in mdpi hdpi xhdpi xxhdpi xxxhdpi; do
+              cp icon.png $R/mipmap-$d/ic_launcher.png
+              cp icon.png $R/mipmap-$d/ic_launcher_round.png
+              cp icon.png $R/mipmap-$d/ic_launcher_foreground.png
+            done
           fi
 
       - name: Sync
